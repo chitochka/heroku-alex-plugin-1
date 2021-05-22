@@ -1,0 +1,36 @@
+/* normalize css starts here */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* normalize css ends here */
+
+
+html {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+    color: #222;
+    background: #111;
+}
+
+/* body {
+    width: 330px;
+    height: 250px;
+} */
+
+#app {
+    /* height: 100%; */
+    background: #bbb;
+    min-width: 380px;
+    max-width: 600px;
+    width: 500px;
+    position: relative;
+    float: right;
+    /* padding: 20px 15px; */
+}
+
+#app > div {
+    min-height: auto !important
+}

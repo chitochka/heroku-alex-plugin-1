@@ -1,8 +1,13 @@
-import Vue from 'vue'
+'use strict';
+
+import './popup.css';
+
+import Vue from 'vue' 
+import vuetify from './plugins/vuetify' 
 import App from './App.vue'
 
-Vue.config.productionTip = false
-
 new Vue({
-  render: h => h(App),
+  vuetify,
+  el: '#app',
+  render: h => h(App)
 }).$mount('#app')
