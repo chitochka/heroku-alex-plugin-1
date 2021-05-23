@@ -7,7 +7,7 @@
            <v-card-text>
           <v-row dense>
             <v-col cols="9">
-              <v-slider label="Sirka okna" 
+              <v-slider label="Šířka  okna" 
                 dense thumb-label   persistent-hint      v-model="height.slider"   :max="height.max"   :min="height.min"   class="align-center"  ></v-slider>
             </v-col>
 
@@ -22,7 +22,7 @@
 
           <v-row dense >
             <v-col cols="9">
-              <v-slider label="Vyska okna" 
+              <v-slider label="Výška  okna" 
                 dense thumb-label   persistent-hint      v-model="width.slider"   :max="width.max"   :min="width.min"   class="align-center"
               >
               </v-slider>

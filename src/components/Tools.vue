@@ -3,7 +3,7 @@
     <v-toolbar  flat color="blue darken-4" dark>
       <v-toolbar-title> {{title}}</v-toolbar-title>
      <v-spacer></v-spacer>
-      <v-btn elevation="8" color="#40cc40" tile>  Ulozit </v-btn>
+      <v-btn elevation="8" color="#40cc40" tile>  Uložit  </v-btn>
     </v-toolbar>
 
     <v-tabs v-model="tab" vertical>
@@ -34,7 +34,7 @@
       <v-tab-item>
         <v-card flat>
           <v-card-text>
-            <p>Suspendisse feugiat. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante </p>
+            <p>Suspendisse feugiat. Suspendisse faucibus, nunc et pelle<br/>ntesque egestas, lacus ante </p>
           </v-card-text>
         </v-card>
       </v-tab-item>
