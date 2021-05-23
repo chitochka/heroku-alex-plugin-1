@@ -12,7 +12,6 @@
 html {
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
     color: #222;
-    background: #111;
 }
 
 /* body {
@@ -21,16 +20,10 @@ html {
 } */
 
 #app {
-    /* height: 100%; */
+    height: 100%;
     background: #bbb;
-    min-width: 380px;
-    max-width: 600px;
-    width: 500px;
-    position: relative;
-    float: right;
+    min-width: 520px;
+    max-width: 650px;
     /* padding: 20px 15px; */
 }
 
-#app > div {
-    min-height: auto !important
-}

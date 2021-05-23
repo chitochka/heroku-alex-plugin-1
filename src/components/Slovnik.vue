@@ -42,29 +42,34 @@ export default {
     translate() {
       const params = "width=550,height=500,left=500,top=0" 
       var url = "https://slovnik.seznam.cz/preklad/cesky_rusky/" + this.text;
-      window.open(url,'slovnik',params);
+      let win = window.open(url,'slovnik',params);
     },
     togglePassword() {
-      this.passwordHide = !this.passwordHide
-      return 
-      this.queryToContentScript("togglePassword", function(response) {
-      })
+      let $vm = this
+      console.log(('togglePassword'));
+        // chrome.runtime.sendMessage({type: "togglePassword"}, function(resp) {
+        //   console.log((resp));
+        // });
+
+      // this.passwordHide = !this.passwordHides
+      // this.queryToContentScript("togglePassword", function(hide) {
+      //   console.log((hide));
+      //   $vm.passwordHide = hide
+      // })
     },
 
     queryToContentScript (type, callback) {
-      /*
-      chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, { type: type },callback)
-      });
-      */
+      // chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+      //   chrome.tabs.sendMessage(tabs[0].id, { type: type },callback)
+      // });
     }
 
   },
   mounted() {
     let $vm = this
-    this.queryToContentScript("getText", function(response) {
-            $vm.text = response
-      });
+    // this.queryToContentScript("getText", function(response) {
+    //         $vm.text = response
+    //   });
   },
 };
 </script>

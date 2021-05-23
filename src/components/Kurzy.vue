@@ -12,6 +12,7 @@
                 outlined
                 prefix="₸"
                 :disabled="disable"
+                   @input="inputKZT"
               ></v-text-field>
             </v-col>
             <v-col >
@@ -20,8 +21,9 @@
                 name="czk"
                 label="CZK"
                 outlined
-                prefix="Kč"
+                prefix="Kč" 
                 :disabled="disable"
+                @input="inputCZK"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -65,7 +67,13 @@ export default {
                 this.disable = false
                 this.loading = false
             },3000)
-        }
+        },
+        inputCZK () {
+          this.kzt = isNaN(this.czk)? 0 : (this.czk * 20.52).toFixed(2)
+        },
+        inputKZT () {
+          this.czk = isNaN(this.kzt)? 0: (this.kzt / 20.52).toFixed(2)
+        },
   }
 };
 </script>

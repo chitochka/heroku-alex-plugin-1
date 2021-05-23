@@ -8,10 +8,10 @@
           <v-tabs  v-model="tab"  background-color="deep-purple accent-4"  centered  dark  icons-and-text>
             <v-tabs-slider></v-tabs-slider>
             <v-tab href="#slovnik">    Slovnik    <v-icon>mdi-flag-variant-outline</v-icon>  </v-tab>
-            <v-tab href="#kurzy">    KZT - CZK    <v-icon>mdi-currency-kzt</v-icon>  </v-tab>
-            <v-tab href="#slider">    Slider    <v-icon>mdi-arrow-collapse-up</v-icon>  </v-tab>
+            <v-tab href="#kurzy">    KZT - CZK    <v-icon >mdi-currency-kzt</v-icon>  </v-tab>
+            <v-tab href="#slider">    Slider    <v-icon medium>mdi-arrow-collapse-up</v-icon>  </v-tab>
             <v-divider  inset  vertical></v-divider>
-            <v-tab href="#tools">    Tools    <v-icon>mdi-tools</v-icon>  </v-tab>
+            <v-tab href="#tools">    Tools    <v-icon dense color="">mdi-tools</v-icon>  </v-tab>
 
           </v-tabs>
           <v-tabs-items v-model="tab">
@@ -47,6 +47,7 @@ import Slovnik from "./components/Slovnik.vue";
 import Kurzy from "./components/Kurzy.vue";
 import Slider from "./components/Slider.vue"
 import Tools from './components/Tools.vue'
+import i18n from './helpers/i18n.js'
 
 export default {
   name: "app",
