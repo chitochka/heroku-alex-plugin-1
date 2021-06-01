@@ -7,17 +7,16 @@
         <v-card >
           <v-tabs  v-model="tab"  background-color="deep-purple accent-4"  centered  dark  icons-and-text>
             <v-tabs-slider></v-tabs-slider>
-            <v-tab href="#slovnik">    Slovnik    <v-icon>mdi-flag-variant-outline</v-icon>  </v-tab>
-            <v-tab href="#kurzy">    KZT - CZK    <v-icon >mdi-currency-kzt</v-icon>  </v-tab>
-            <v-tab href="#slider">    Slider    <v-icon medium>mdi-arrow-collapse-up</v-icon>  </v-tab>
-            <v-divider  inset  vertical></v-divider>
-            <v-tab href="#tools">    Tools    <v-icon dense color="">mdi-tools</v-icon>  </v-tab>
+            <v-tab v-for="item in tabItems" :key="item.href" v-if="item.href" :href="'#'+item.href">
+                {{item.href }}
+                <v-icon :dense="item.href === 'tools'" >{{item.icon}} </v-icon> 
+            </v-tab>
+         
+            <v-divider v-else  inset  vertical></v-divider>
 
           </v-tabs>
+
           <v-tabs-items v-model="tab">
-            <!-- <v-tab-item v-for="i in 3" :key="i" :value="'tab-' + i">
-              <v-card flat><v-card-text>{{ text }}</v-card-text></v-card>
-            </v-tab-item> -->
             <v-tab-item :value="'slovnik' ">
                <Slovnik></Slovnik>
             </v-tab-item>
@@ -32,8 +31,8 @@
             <v-tab-item :value="'tools' ">
                <Tools></Tools>
             </v-tab-item>
-
           </v-tabs-items>
+
         </v-card>
       </v-container>
     </v-main>
@@ -42,7 +41,7 @@
 
 
 <script>
-import MyMenu from "./components/Menu.vue";
+// import MyMenu from "./components/Menu.vue";
 import Slovnik from "./components/Slovnik.vue";
 import Kurzy from "./components/Kurzy.vue";
 import Slider from "./components/Slider.vue"
@@ -53,14 +52,25 @@ export default {
   name: "app",
   data() {
     return {
-      right: null,
+      // right: null,
+      text: 'lopem',
       tab: null,
-      text: 'lopem'
+      tabItems :  [
+        { href:"slovnik", icon: 'mdi-flag-variant-outline', a : Slovnik },
+        { href:"kurzy",   icon: 'mdi-currency-kzt' },
+        { href:"slider",  icon: 'mdi-arrow-collapse-up' },
+        {},
+        { href:"tools",  icon: 'mdi-tools' },
+      ],
     };
   },
-  components: { Slovnik, MyMenu, Kurzy , Slider, Tools},
+  computed:{
+  },
+  components: { Slovnik, Kurzy , Slider, Tools},
   created() {},
-  mounted() {},
+  mounted() {
+    window.vv = this
+  },
 };
 </script>
 
