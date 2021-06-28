@@ -60,7 +60,7 @@
 <script>
 
 import dict from '../temp/index.js'
-import {sysTls} from '../helpers/i18n.js'
+// import {sysTls} from '../helpers/i18n.js'
 import ToolsSlovnik from './tools/ToolsSlovnik'
 import ToolsScrollUp from './tools/ToolsScrollUp'
 
