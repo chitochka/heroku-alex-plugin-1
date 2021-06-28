@@ -36,7 +36,7 @@ import Slovnik from "./components/Slovnik.vue";
 import Kurzy from "./components/Kurzy.vue";
 import Slider from "./components/Slider.vue"
 import Tools from './components/Tools.vue'
-import i18n from './helpers/i18n.js'
+
 
 export default {
   name: "app",
