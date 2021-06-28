@@ -1,26 +1,16 @@
-export default {
-    cz : {
-        appMenu : [],
-        tools : {
-            tabTitle : ["Nastaveni slovnika","Nastaveni Kurza Men","Nastaveni Slider","Nastaveni App",],
-            tabs : [
-                ""
-            ]
-        }
+import Vue from 'vue'
+import Vuex from 'vuex'
+import slovnik from './modules/slovnik'
 
-    },
-    ru : {}
-}
+Vue.use(Vuex)
 
+export default new Vuex.Store({
+    actions:{},
+    mutations:{},
+    state:{},
+    getters:{},
 
-
-
-/*
-
-
-
-"",
-
-
-
-*/
+    modules:{
+        slovnik
+    }
+})

@@ -7,6 +7,7 @@
         <v-card >
           <v-tabs  v-model="tab"  background-color="deep-purple accent-4"  centered  dark  icons-and-text>
             <v-tabs-slider></v-tabs-slider>
+            <!-- Pokud -->
             <v-tab v-for="item in tabItems" :key="item.href" v-if="item.href" :href="'#'+item.href">
                 {{item.href }}
                 <v-icon :dense="item.href === 'tools'" >{{item.icon}} </v-icon> 
@@ -17,19 +18,8 @@
           </v-tabs>
 
           <v-tabs-items v-model="tab">
-            <v-tab-item :value="'slovnik' ">
-               <Slovnik></Slovnik>
-            </v-tab-item>
-
-            <v-tab-item :value="'kurzy' ">
-               <Kurzy></Kurzy>
-            </v-tab-item>
-            <v-tab-item :value="'slider' ">
-               <Slider></Slider>
-            </v-tab-item>
-        
-            <v-tab-item :value="'tools' ">
-               <Tools></Tools>
+            <v-tab-item v-for="item in tabItems" :key="item.href" :value="item.href">
+              <component :is="item.href"></component>
             </v-tab-item>
           </v-tabs-items>
 

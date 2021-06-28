@@ -2,8 +2,8 @@
   <v-card class="rounded-0">
     <v-toolbar  flat color="blue darken-4" dark>
       <v-toolbar-title> {{title}}</v-toolbar-title>
-     <v-spacer></v-spacer>
-      <v-btn elevation="8" color="#40cc40" tile>  Uložit  </v-btn>
+      <v-spacer></v-spacer>
+      <!-- <v-btn @click="save" elevation="8" color="#40cc40" tile>  Uložit  </v-btn> -->
     </v-toolbar>
 
     <v-tabs v-model="tab" vertical>
@@ -25,9 +25,7 @@
 
       <v-tab-item>
         <v-card flat>
-          <!-- <v-card-text> -->
-            <SlovnikTools></SlovnikTools>            
-          <!-- </v-card-text> -->
+            <ToolsSlovnik></ToolsSlovnik>            
         </v-card>
       </v-tab-item>
 
@@ -41,9 +39,7 @@
 
       <v-tab-item>
         <v-card flat>
-          <v-card-text>
-            <p>Fusce a quam. Phasellus nec sem in justo pellentesque facilisis</p>
-          </v-card-text>
+          <ToolsScrollUp></ToolsScrollUp>
         </v-card>
       </v-tab-item>
 
@@ -63,9 +59,10 @@
 
 <script>
 
-import dict from '../store/index.js'
+import dict from '../temp/index.js'
 import {sysTls} from '../helpers/i18n.js'
-import SlovnikTools from './tools/slovnikTools.vue'
+import ToolsSlovnik from './tools/ToolsSlovnik'
+import ToolsScrollUp from './tools/ToolsScrollUp'
 
     export default {
         data(){
@@ -77,7 +74,10 @@ import SlovnikTools from './tools/slovnikTools.vue'
         computed :{
           title () { return this.tabTitle[this.tab] }
         },
-        components: {SlovnikTools}
+        methods:{
+          save(){}
+        },
+        components: {ToolsSlovnik, ToolsScrollUp}
     }
 </script>
 

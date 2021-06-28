@@ -1,29 +1,32 @@
 <template>
   <div>
+        <v-form >
     <v-card flat>
       <v-card-text>
-        <v-text-field
-          v-model="text"
-          label="slovo pro preklad"
+        <v-text-field 
+          v-model.trim="text"
+          label="Slovo pro překlad"
           hide-details="auto"
         ></v-text-field>
       </v-card-text>
       <v-card-actions>
         
-        <v-btn  color="primary"
+        <v-btn small color="primary"
           @click="togglePassword"> {{passwordHide?'Ukazat':'Skryt'}} {{'hesla'}} 
         </v-btn>
         <v-spacer></v-spacer>
         <v-btn
-          @click="translate"
+          @click.prevent="translate"
           :disabled="text ? false : true"
           :elevation="5"
           color="primary"
+          type="submit" 
         >
           Přelož
         </v-btn>
       </v-card-actions>
     </v-card>
+        </v-form>
   </div>
 </template>
 
@@ -47,6 +50,7 @@ export default {
     togglePassword() {
       let $vm = this
       console.log(('togglePassword'));
+      /* funkce se pouziva ve verze Google Extension
         // chrome.runtime.sendMessage({type: "togglePassword"}, function(resp) {
         //   console.log((resp));
         // });
@@ -56,20 +60,25 @@ export default {
       //   console.log((hide));
       //   $vm.passwordHide = hide
       // })
+      */
     },
 
     queryToContentScript (type, callback) {
-      // chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-      //   chrome.tabs.sendMessage(tabs[0].id, { type: type },callback)
-      // });
+      /* funkce se pouziva ve verze Google Extension
+      chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, { type: type },callback)
+      });
+      */
     }
 
   },
   mounted() {
     let $vm = this
-    // this.queryToContentScript("getText", function(response) {
-    //         $vm.text = response
-    //   });
+    /* funkce se pouziva ve verze Google Extension
+    this.queryToContentScript("getText", function(response) {
+            $vm.text = response
+      });
+    */
   },
 };
 </script>
