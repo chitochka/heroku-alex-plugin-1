@@ -4,30 +4,30 @@
       <v-card class="" elevation="10" max-width="" :loading="loading">
         <v-card-text>
           <v-row>
+            
             <v-col >
-              <v-text-field
+              <v-text-field type="number" name="kzt"  label="KZT" prefix="₸" outlined
                 v-model="kzt"
-                name="kzt"
-                label="KZT"
-                outlined
-                prefix="₸"
                 :disabled="disable"
-                   @input="inputKZT"
+                @input="inputKZT"
+                @blur="truncate"
               ></v-text-field>
             </v-col>
+            
             <v-col >
-              <v-text-field
+              <v-text-field type="number" name="czk"  label="CZK"  prefix="Kč"  outlined
                 v-model="czk"
-                name="czk"
-                label="CZK"
-                outlined
-                prefix="Kč" 
                 :disabled="disable"
                 @input="inputCZK"
+                @blur="truncate"
               ></v-text-field>
             </v-col>
+
           </v-row>
-          <h5>  kurzy byli stahnute naposled 1.5.2021 </h5>
+          <h5>  
+            kurzy byli naposled stahnute <strong> {{this.date}} </strong> 
+          </h5>
+          1 Kc = {{CZK_KZT }}    KZT
         </v-card-text>
 
         <v-card-actions>
@@ -49,32 +49,53 @@
 
 
 <script>
+import {mapGetters, mapMutations} from 'vuex'
+import store from 'vuex'
+
 export default {
   data() {
     return {
       kzt: null,
       czk: null,
 
+      date: null,
+      CZK_KZT:0, //  kolik KZT v 1Kc
       disable:false,
       loading:false
     };
   },
   methods:{
-        loadData (){
-            this.disable = true
-            this.loading = true
-            setTimeout(()=>{
-                this.disable = false
-                this.loading = false
-            },3000)
-        },
-        inputCZK () {
-          this.kzt = isNaN(this.czk)? 0 : (this.czk * 20.52).toFixed(2)
-        },
-        inputKZT () {
-          this.czk = isNaN(this.kzt)? 0: (this.kzt / 20.52).toFixed(2)
-        },
+    inputKZT () {
+      this.czk = (!!+this.kzt)? (this.kzt / this.CZK_KZT).toFixed(2) : ''
+    },
+    inputCZK () {
+      this.kzt = (!!+this.czk)? (this.czk * this.CZK_KZT).toFixed(2) : ''
+    },    
+    truncate (){
+      if ((!+this.kzt) || (!+this.czk)) {
+        this.czk = this.kzt = null
+      } else {
+        this.kzt = (+this.kzt).toFixed(2)
+        this.czk = (+this.czk).toFixed(2)
+      }
+    },
+
+    loadData (){
+      this.disable = true
+      this.loading = true
+        setTimeout(()=>{
+            this.disable = false
+            this.loading = false
+        },3000)
+      },
+  },
+  
+  async mounted() {
+    let {date, rates: {CZK, KZT}} = await this.$store.getters.currency
+    this.date = new Date(date).toLocaleDateString()
+    this.CZK_KZT =  (KZT/CZK).toFixed(2)
   }
+
 };
 </script>
 
