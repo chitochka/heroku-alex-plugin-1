@@ -1,4 +1,4 @@
-const key = '8578e8d026e18e8b31747d4eab656c01'
+const key = '320a798ebf775d31f3e7'   // https://free.currconv.com/
 
 
 export default {
@@ -6,7 +6,8 @@ export default {
         async fetchCurrency({commit}) {
             try {
                 // const key = process.env.VUE_APP_FIXER
-                const res = await fetch(`http://data.fixer.io/api/latest?access_key=${key}&symbols=USD,EUR,RUB`)
+                const res = await fetch(`https://free.currconv.com/api/v7/convert?q=CZK_KZT,KZT_CZK&compact=ultra&apiKey=${key}`)
+                // const res = await fetch(`http://data.fixer.io/api/latest?access_key=${key}&symbols=USD,EUR,RUB`)
                 console.log('\n ---> STORE ---> ACTION  ---->  SET_ACTUAL_CURRENCY')
                 await commit('SET_ACTUAL_CURRENCY', res.json())
                 // return await res.json()
@@ -18,6 +19,7 @@ export default {
     mutations:{
         SET_ACTUAL_CURRENCY(state, currency) {
             console.log('\n ---> STORE ---> MUTATION  ---->  SET_ACTUAL_CURRENCY')
+            currency.date = + new Date()
             localStorage.setItem('currency', JSON.stringify(currency) )
             state.currency = currency
         }
@@ -44,14 +46,11 @@ export default {
 /*
 
 
-base: "EUR",
-date: "2021-07-09",
-rates: {
-    USD: 1.187775,
-    CZK: 25.744672,
-    KZT: 509.090783
-    },
-success: true
+{
+    "CZK_KZT": 19.748054,
+    "KZT_CZK": 0.050638
+}
+
 
 
 */

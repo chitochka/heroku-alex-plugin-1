@@ -33,3 +33,24 @@ html {
 #app > div {
     min-height: auto !important
 }
+
+
+
+
+/* 
+Tlacitko pro smazani dat z local storage, umistino v footeru 
+*/
+#clearLS{
+    background: rgb(4, 1, 51);
+    color: red;
+    border: 2px solid rgb(255, 0, 179);
+    padding: 3px 5px;
+    position: fixed;
+    bottom: 15px;
+    right: 25px;
+    
+}
+
+#clearLS:hover{
+    box-shadow: 0px 0px 3px 1px orangered;
+}

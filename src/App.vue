@@ -8,7 +8,7 @@
           <v-tabs  v-model="tab"  background-color="deep-purple accent-4"  centered  dark  icons-and-text>
             <v-tabs-slider></v-tabs-slider>
             <!-- Pokud -->
-            <v-tab v-for="item in tabItems" :key="item.href" v-if="item.href" :href="'#'+item.href">
+            <v-tab   v-ripple="{ center: true }" v-for="item in tabItems" :key="item.href" v-if="item.href" :href="'#'+item.href">
                 {{item.href }}
                 <v-icon :dense="item.href === 'tools'" >{{item.icon}} </v-icon> 
             </v-tab>
