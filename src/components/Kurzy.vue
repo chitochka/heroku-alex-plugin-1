@@ -4,13 +4,14 @@
       <v-card class="" elevation="10" max-width="" :loading="loading">
         <v-card-text>
           <v-row>
+            
             <v-col>
               <v-text-field
                 type="number"
                 name="kzt"
                 label="KZT"
                 prefix="₸"
-                outlined
+                outlined hideDetails
                 v-model="kzt"
                 :disabled="disable"
                 @input="inputKZT"
@@ -24,7 +25,7 @@
                 name="czk"
                 label="CZK"
                 prefix="Kč"
-                outlined
+                outlined hideDetails
                 v-model="czk"
                 :disabled="disable"
                 @input="inputCZK"
@@ -33,53 +34,27 @@
             </v-col>
           </v-row>
 
-          <v-row>
-            <v-col cols="6">
-              <v-banner>
-                <v-text-field
-                :class="'textToRight'"
-                readonly
-                label="od 11.07.2021"
-                value="10.02"
-                prefix="KZT"
-                suffix="1 Kc  ="
-              ></v-text-field>
-              </v-banner>
-                     
-                     
-              <v-banner>
-                 <v-text-field
-                :class="''"
-                readonly
-                reverse
-                solo
-                label="od 11.07.2021"
-                value="10.02"
-                prefix="KZT"
-                suffix="1 Kc="
-              ></v-text-field>
-              </v-banner>
-              
-            </v-col>
-            <v-col cols="6">
-             
+
        
-            </v-col>
-          </v-row>
           <v-row>
-            <v-col cols="9"> </v-col>
-            <v-col cols="3" align-self="end" class="textToRight">
-              datum {{ new Date().toLocaleDateString() }}
+            <v-col cols="6" class="rates"> 
+              <div> <span>1 <small> €  </small> </span> → <span>   {{ currency.EUR_KZT.toFixed(2)  }} </span> <small>KZT</small>  </div>
+              <div> <span>1 <small> Kc </small> </span> → <span>   {{  currency.CZK_KZT.toFixed(2)   }} </span> <small>KZT</small>  </div>
+            </v-col>
+
+            <v-col cols="6" align-self="end" class="textToRight">
+              <div> Pocet stahnuti:   {{usage.usage}} </div>
+               {{ new Date(usage.timestamp).toGMTString().substr(5,17) }}
             </v-col>
           </v-row>
+
         </v-card-text>
 
         <v-card-actions>
-          <!-- <v-text-field  :class="'textToRight'"    readonly  reverse    label="od 11.07.2021"       value="10.02"      prefix="KZT"   suffix="1 Kc  ="      
-></v-text-field> -->
+
 
           <v-spacer></v-spacer>
-          <v-btn
+          <!-- <v-btn
             small
             elevation="5"
             color="primary"
@@ -87,7 +62,7 @@
             :disabled="disable"
           >
             Stahnout nove kurzy
-          </v-btn>
+          </v-btn> -->
         </v-card-actions>
       </v-card>
     </v-form>
@@ -110,10 +85,10 @@ export default {
       kzt: null,
       czk: null,
 
-      currency: null,
-
-      // date: null,
-      // CZK_KZT:0, //  kolik KZT v 1Kc
+      currency: {
+        CZK_KZT:0, EUR_KZT:0
+      },
+      usage:{usage:0, timestamp: 0},
       disable: false,
       loading: false,
     };
@@ -121,12 +96,12 @@ export default {
   methods: {
     inputKZT() {
       this.czk = !!+this.kzt
-        ? (this.kzt * this.currency.KZT_CZK).toFixed(2)
+        ? (+this.kzt * (1/this.currency.CZK_KZT)).toFixed(2)
         : "";
     },
     inputCZK() {
       this.kzt = !!+this.czk
-        ? (this.czk * this.currency.CZK_KZT).toFixed(2)
+        ? (+this.czk * this.currency.CZK_KZT).toFixed(2)
         : "";
     },
     truncate() {
@@ -147,28 +122,41 @@ export default {
       }, 3000);
     },
   },
-
-  beforeMount() {
-    this.currency = this.$store.getters.currency;
-
-    // let {date, rates: {CZK, KZT}} = await this.$store.getters.currency
-    // this.date = new Date(date).toLocaleDateString()
-    // this.CZK_KZT =  (KZT/CZK).toFixed(2)
-  },
+  async mounted(){
+        this.currency = await this.$store.dispatch('fetchCurrencyData')
+        this.usage = this.$store.getters.usage
+        window.tt = this
+        console.log('[Mounted]')
+        console.log(this.currency)
+        
+  }
 };
 </script>
 
 
 
 <style  scoped>
-.textToRight {
-  text-align: right;
-}
 
-.row {
-  border: 2px solid red;
-}
-.col {
-  border: 2px dotted rgb(24, 109, 221);
-}
+  small {
+      color: rgb(11, 29, 192);
+  }
+
+  .rates div {
+    padding-left: 1rem ;
+  }
+  .rates div span{
+    font-weight: bolder;
+    color: rgb(0, 0, 0);
+  }
+
+  .textToRight {
+    text-align: right;
+  }
+
+  .row {
+    border: 0px solid red;
+  }
+  .col {
+    border: 0px dotted rgb(24, 109, 221);
+  }
 </style>>
