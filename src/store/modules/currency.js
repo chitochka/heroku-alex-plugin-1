@@ -1,3 +1,4 @@
+// https://free.currconv.com/others/usage?apiKey=320a798ebf775d31f3e7
 // const key = process.env.VUE_APP_FIXER
 const key = '320a798ebf775d31f3e7'   // https://free.currconv.com/
 
@@ -11,10 +12,14 @@ export default {
                     console.log('LIMIT API USAGE=', usage.usage)
                     throw 'LIMIT_USAGE'
                 } else {
-                    return await dispatch('fetchActualCurrency')
+                    return {
+                        rates:await dispatch('fetchActualCurrency'),
+                        usage
+                    }
                 }
             } catch (error) {
-                console.log("ERRRRR")
+                console.log("\nERR RRR")
+                console.log(error)
             }
 
             // 
@@ -22,10 +27,12 @@ export default {
         async fetchHowManyUsage ({commit}) {
             try {
                 const res = await fetch(`https://free.currconv.com/others/usage?apiKey=${key}`)
+                console.log('-----------')
+                // if (res.status !== 200) throw res.json()
                 const usage = await res.json()
                 commit('SET_USAGE', usage)
                 return usage
-            } catch (error) { }
+            } catch (error) { console.log("\nERR R RR"); throw error}
         },
         async fetchActualCurrency  ({commit}) {
             try {
@@ -33,7 +40,7 @@ export default {
                     const currency = await res.json()
                     commit('SET_ACTUAL_CURRENCY', currency)
                     return  currency
-                } catch (e) {
+                } catch (e) { throw e
                 }
         }
     },

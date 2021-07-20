@@ -36,15 +36,15 @@
 
 
        
-          <v-row>
+          <v-row v-if="currency">
             <v-col cols="6" class="rates"> 
-              <div> <span>1 <small> €  </small> </span> → <span>   {{ currency.EUR_KZT.toFixed(2)  }} </span> <small>KZT</small>  </div>
-              <div> <span>1 <small> Kc </small> </span> → <span>   {{  currency.CZK_KZT.toFixed(2)   }} </span> <small>KZT</small>  </div>
+              <div> <span>1 <small> €  </small> </span> → <span>   {{ currency.rates.EUR_KZT.toFixed(2)  }} </span> <small>KZT</small>  </div>
+              <div> <span>1 <small> Kc </small> </span> → <span>   {{ currency.rates.CZK_KZT.toFixed(2)  }} </span> <small>KZT</small>  </div>
             </v-col>
 
             <v-col cols="6" align-self="end" class="textToRight">
-              <div> Pocet stahnuti:   {{usage.usage}} </div>
-               {{ new Date(usage.timestamp).toGMTString().substr(5,17) }}
+              <div> Pocet stahnuti:   {{currency.usage.usage }} </div>
+               {{ new Date(currency.usage.timestamp).toGMTString().substr(5,17)  }}
             </v-col>
           </v-row>
 
@@ -85,10 +85,7 @@ export default {
       kzt: null,
       czk: null,
 
-      currency: {
-        CZK_KZT:0, EUR_KZT:0
-      },
-      usage:{usage:0, timestamp: 0},
+      currency: null,
       disable: false,
       loading: false,
     };
@@ -96,12 +93,12 @@ export default {
   methods: {
     inputKZT() {
       this.czk = !!+this.kzt
-        ? (+this.kzt * (1/this.currency.CZK_KZT)).toFixed(2)
+        ? (+this.kzt * (1/this.currency.rates.CZK_KZT)).toFixed(2)
         : "";
     },
     inputCZK() {
       this.kzt = !!+this.czk
-        ? (+this.czk * this.currency.CZK_KZT).toFixed(2)
+        ? (+this.czk * this.currency.rates.CZK_KZT).toFixed(2)
         : "";
     },
     truncate() {
@@ -124,7 +121,6 @@ export default {
   },
   async mounted(){
         this.currency = await this.$store.dispatch('fetchCurrencyData')
-        this.usage = this.$store.getters.usage
         window.tt = this
         console.log('[Mounted]')
         console.log(this.currency)

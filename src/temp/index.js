@@ -1,4 +1,4 @@
-export default {
+/*export default {
     cz : {
         appMenu : [],
         tools : {
@@ -12,7 +12,7 @@ export default {
     ru : {}
 }
 
-
+*/
 
 
 /*
