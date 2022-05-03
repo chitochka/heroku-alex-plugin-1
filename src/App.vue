@@ -60,7 +60,6 @@ export default {
   created() {},
   mounted() {
     window.vv = this
-    alert()
   },
 };
 </script>

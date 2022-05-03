@@ -43,7 +43,9 @@ export default {
   // },
   methods: {
     translate() {
-      const params = "width=550,height=500,left=500,top=0" 
+      var width = JSON.parse(localStorage.slovnikWidth).value
+      var height = JSON.parse(localStorage.slovnikHeight).value
+      const params = `width=${width},height=${height},left=500,top=0`
       var url = "https://slovnik.seznam.cz/preklad/cesky_rusky/" + this.text;
       let win = window.open(url,'slovnik',params);
     },
